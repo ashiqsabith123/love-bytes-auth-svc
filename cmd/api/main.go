@@ -1,13 +1,16 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"log"
+
+	"github.com/ashiqsabith123/auth-svc/pkg/config"
+	"github.com/ashiqsabith123/auth-svc/pkg/db"
+)
 
 func main() {
-    r := gin.Default()
-    r.GET("/ping", func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            "message": "pong",
-        })
-    })
-    r.Run("0.0.0.0:8080") // listen and serve on 0.0.0.0:8080
+	config, err := config.LoadConfig()
+	if err != nil {
+		log.Fatal("Error while loading config", err)
+	}
+	db.ConnectToDatabase(config)
 }
