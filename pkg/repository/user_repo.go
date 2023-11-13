@@ -14,7 +14,7 @@ func NewUserRepo(db *gorm.DB) interfaces.UserRepo {
 	return &UserRepo{Postgres: db}
 }
 
-func (U *UserRepo) FindUser(phone int) (bool, error) {
+func (U *UserRepo) FindUser(phone int64) (bool, error) {
 	var count int
 
 	query := "SELECT COUNT(*) FROM users WHERE phone=$1"
