@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/ashiqsabith123/auth-svc/pkg/domain"
 	interfaces "github.com/ashiqsabith123/auth-svc/pkg/repository/interface"
 	"gorm.io/gorm"
 )
@@ -30,6 +31,10 @@ func (U *UserRepo) FindUser(phone int) (bool, error) {
 
 }
 
-func (U *UserRepo) CreateUser() {
+func (U *UserRepo) CreateUser(user domain.User) error {
+	if err := U.Postgres.Create(&user).Error; err != nil {
+		return err
+	}
 
+	return nil
 }
