@@ -11,6 +11,7 @@ import (
 
 type UserService struct {
 	UserUsecase usecase.UserUsecase
+	pb.UnimplementedAuthServiceServer
 }
 
 func NewUserService(usecase usecase.UserUsecase) UserService {

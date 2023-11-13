@@ -10,8 +10,13 @@ type DBConfig struct {
 	Paswword string `mapstructure:"password"`
 }
 
+type Port struct {
+	SvcPort string `mapstructure:"port"`
+}
+
 type Config struct {
 	Postgres DBConfig `mapstructure:"db"`
+	Port     Port
 }
 
 var config Config
