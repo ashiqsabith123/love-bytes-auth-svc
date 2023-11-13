@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"log"
+	"errors"
 
 	"github.com/ashiqsabith123/auth-svc/pkg/domain"
 	repo "github.com/ashiqsabith123/auth-svc/pkg/repository/interface"
@@ -16,14 +16,22 @@ func NewUserUsecase(repo repo.UserRepo) usecase.UserUsecase {
 	return &UserUsecase{UserRepo: repo}
 }
 
-func (U *UserUsecase) SignUp(user domain.User) {
-	ok, _ := U.UserRepo.FindUser(user.Phone)
+func (U *UserUsecase) SignUp(user domain.User) error {
+	ok, err := U.UserRepo.FindUser(user.Phone)
 
-	if !ok {
-		err := U.UserRepo.CreateUser(user)
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil {
+		return err
 	}
+
+	if ok {
+		return errors.New("User already exist with this phone number")
+	}
+
+	err = U.UserRepo.CreateUser(user)
+	if err != nil {
+		return err
+	}
+
+	return nil
 
 }

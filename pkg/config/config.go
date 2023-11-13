@@ -16,7 +16,7 @@ type Port struct {
 
 type Config struct {
 	Postgres DBConfig `mapstructure:"db"`
-	Port     Port
+	Port     Port     `mapstructure:"svc-port"`
 }
 
 var config Config

@@ -7,7 +7,6 @@ import (
 
 	"github.com/ashiqsabith123/auth-svc/pkg/config"
 	"github.com/ashiqsabith123/auth-svc/pkg/di"
-	"github.com/ashiqsabith123/auth-svc/pkg/helper"
 	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
 	"google.golang.org/grpc"
 )
@@ -24,14 +23,14 @@ func main() {
 		log.Fatalln("Failed to listening:", err)
 	}
 
-	credentials, err := helper.GetCertificates("cmd/cert/ca-cert.pem", "cmd/cert/server-cert.pem", "cmd/cert/server-key.pem")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// credentials, err := helper.GetCertificates("cmd/cert/ca-cert.pem", "cmd/cert/server-cert.pem", "cmd/cert/server-key.pem")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
 	fmt.Println("Auth Svc on", config.Port.SvcPort)
 
-	grpcServer := grpc.NewServer(grpc.Creds(credentials))
+	grpcServer := grpc.NewServer()
 
 	pb.RegisterAuthServiceServer(grpcServer, &service)
 

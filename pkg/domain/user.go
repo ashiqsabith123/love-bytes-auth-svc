@@ -1,9 +1,9 @@
 package domain
 
 type User struct {
-	ID       string `gorm:"primaryKey;autoIncrement"`
+	ID       int    `gorm:"primaryKey;autoIncrement"`
 	Fullname string `gorm:"not null"`
-	Phone    int64  `gorm:"unique;not null"`
+	Phone    int64  `gorm:"unique"`
 	Username string `gorm:"unique; not null"`
 	Password string `gorm:"not null"`
 }
