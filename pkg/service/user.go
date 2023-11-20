@@ -30,3 +30,21 @@ func (U *UserService) Signup(ctx context.Context, req *pb.SignUpReq) (*pb.Respon
 		Code:    200,
 	}, nil
 }
+
+func (U *UserService) SendOtp(ctx context.Context, req *pb.OtpReq) (*pb.Responce, error) {
+
+	resp, err := U.UserUsecase.SendOtp(req.Phone)
+
+	if err != nil {
+		return &pb.Responce{
+			Code:    500,
+			Message: resp,
+			Error:   err.Error(),
+		}, nil
+	}
+
+	return &pb.Responce{
+		Code:    200,
+		Message: resp,
+	}, nil
+}

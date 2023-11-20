@@ -7,15 +7,18 @@ import (
 
 	"github.com/ashiqsabith123/auth-svc/pkg/config"
 	"github.com/ashiqsabith123/auth-svc/pkg/di"
+	"github.com/ashiqsabith123/auth-svc/pkg/utils"
 	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
 	"google.golang.org/grpc"
 )
 
 func main() {
+
 	config, err := config.LoadConfig()
 	if err != nil {
 		log.Fatal("Error while loading configz", err)
 	}
+	utils.InitTwilio(config)
 	service := di.IntializeService(config)
 
 	lis, err := net.Listen("tcp", config.Port.SvcPort)

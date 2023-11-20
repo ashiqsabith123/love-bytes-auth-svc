@@ -10,13 +10,20 @@ type DBConfig struct {
 	Paswword string `mapstructure:"password"`
 }
 
+type TwilioConfig struct {
+	AccSid string `mapstructure:"accsid"`
+	SerSid string `mapstructure:"sersid"`
+	Auth   string `mapstructure:"auth"`
+}
+
 type Port struct {
 	SvcPort string `mapstructure:"port"`
 }
 
 type Config struct {
-	Postgres DBConfig `mapstructure:"db"`
-	Port     Port     `mapstructure:"svc-port"`
+	Postgres DBConfig     `mapstructure:"db"`
+	Port     Port         `mapstructure:"svc-port"`
+	Twilio   TwilioConfig `mapstructure:"twilio"`
 }
 
 var config Config
