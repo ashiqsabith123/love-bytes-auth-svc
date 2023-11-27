@@ -1,8 +1,10 @@
 package interfaces
 
-import "github.com/ashiqsabith123/auth-svc/pkg/domain"
+import (
+	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
+)
 
 type UserUsecase interface {
-	SignUp(user domain.User) error
-	SendOtp(phone string) (string, error)
+	VerifyOtpAndSignUp(rep *pb.OtpSignUpReq) (string, int, error)
+	SendOtp(phone string) (string, int, error)
 }

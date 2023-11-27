@@ -3,10 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/ashiqsabith123/auth-svc/pkg/domain"
 	usecase "github.com/ashiqsabith123/auth-svc/pkg/usecase/interfaces"
 	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
-	"github.com/jinzhu/copier"
 )
 
 type UserService struct {
@@ -18,31 +16,63 @@ func NewUserService(usecase usecase.UserUsecase) UserService {
 	return UserService{UserUsecase: usecase}
 }
 
-func (U *UserService) Signup(ctx context.Context, req *pb.SignUpReq) (*pb.Responce, error) {
-	var user domain.User
+func (U *UserService) Signup(ctx context.Context, req *pb.OtpSignUpReq) (*pb.Responce, error) {
 
-	copier.Copy(user, &req)
+	resp, status, err := U.UserUsecase.VerifyOtpAndSignUp(req)
 
-	U.UserUsecase.SignUp(user)
+	var code int32
+
+	switch status {
+	case 1:
+		code = 200
+	case 2:
+		code = 401
+	case 3:
+		code = 403
+	case 5:
+		code = 500
+	case 6:
+		code = 400
+
+	}
+
+	if err != nil {
+		return &pb.Responce{
+			Message: resp,
+			Code:    code,
+			Error:   err.Error(),
+		}, nil
+	}
 
 	return &pb.Responce{
-		Message: "Login succesfull",
+		Message: "Signup succesfull",
 		Code:    200,
 	}, nil
 }
 
 func (U *UserService) SendOtp(ctx context.Context, req *pb.OtpReq) (*pb.Responce, error) {
 
-	resp, err := U.UserUsecase.SendOtp(req.Phone)
+	resp, status, err := U.UserUsecase.SendOtp(req.Phone)
+
+	var code int32
+
+	switch status {
+	case 1:
+		code = 500
+	case 3:
+		code = 500
+	case 2:
+		code = 400
+
+	}
 
 	if err != nil {
 		return &pb.Responce{
-			Code:    500,
+			Code:    code,
 			Message: resp,
 			Error:   err.Error(),
 		}, nil
 	}
-
 	return &pb.Responce{
 		Code:    200,
 		Message: resp,
