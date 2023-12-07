@@ -25,7 +25,7 @@ require (
 )
 
 require (
-	github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231127035440-715a5afa2d0f
+	github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231127043225-8d5e2999447f
 	github.com/fatih/color v1.16.0
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-playground/validator/v10 v10.16.0

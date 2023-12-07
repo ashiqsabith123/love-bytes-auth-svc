@@ -2,7 +2,6 @@ package utils
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/ashiqsabith123/auth-svc/pkg/config"
 	"github.com/twilio/twilio-go"
@@ -36,9 +35,9 @@ func SendOtp(phone string) (string, error) {
 
 }
 
-func VerifyOtp(phone int64, code string) (int, error) {
+func VerifyOtp(phone string, code string) (int, error) {
 	params := &openapi.CreateVerificationCheckParams{}
-	params.SetTo(fmt.Sprint("+91", phone))
+	params.SetTo("+91" + phone)
 	params.SetCode(code)
 
 	resp, err := client.VerifyV2.CreateVerificationCheck(SERVICE_ID, params)

@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 
 	usecase "github.com/ashiqsabith123/auth-svc/pkg/usecase/interfaces"
 	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
@@ -16,13 +17,15 @@ func NewUserService(usecase usecase.UserUsecase) UserService {
 	return UserService{UserUsecase: usecase}
 }
 
-func (U *UserService) Signup(ctx context.Context, req *pb.OtpSignUpReq) (*pb.Responce, error) {
+func (U *UserService) VerifyOtpAndSignup(ctx context.Context, req *pb.OtpSignUpReq) (*pb.Responce, error) {
 
 	resp, status, err := U.UserUsecase.VerifyOtpAndSignUp(req)
 
 	var code int32
 
 	switch status {
+	case 0:
+		code = 404
 	case 1:
 		code = 200
 	case 2:
@@ -65,6 +68,8 @@ func (U *UserService) SendOtp(ctx context.Context, req *pb.OtpReq) (*pb.Responce
 		code = 400
 
 	}
+
+	fmt.Println(resp, err)
 
 	if err != nil {
 		return &pb.Responce{

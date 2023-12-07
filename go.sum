@@ -42,6 +42,8 @@ github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231117102816-a1c9a3151023 h1
 github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231117102816-a1c9a3151023/go.mod h1:5i/BQmSOfCoNrgnPsXCA+Rlc9MLAo5z0peNA4NeJqt0=
 github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231127035440-715a5afa2d0f h1:xOJY1xgMhVkGETyOnSQ9a3/Pu0073CpCW0aS/mioGD0=
 github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231127035440-715a5afa2d0f/go.mod h1:5i/BQmSOfCoNrgnPsXCA+Rlc9MLAo5z0peNA4NeJqt0=
+github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231127043225-8d5e2999447f h1:tFehzFe6zYGLa/jtlkbdGoKc3LBCtwEU+5GIriFjUVY=
+github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231127043225-8d5e2999447f/go.mod h1:5i/BQmSOfCoNrgnPsXCA+Rlc9MLAo5z0peNA4NeJqt0=
 github.com/beevik/etree v1.1.0/go.mod h1:r8Aw8JqVegEf0w2fDnATrX9VpkMcyFeM0FhwO62wh+A=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
