@@ -1,10 +1,9 @@
 package interfaces
 
-import (
-	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
-)
+import "github.com/ashiqsabith123/love-bytes-proto/auth/pb"
 
 type UserUsecase interface {
-	VerifyOtpAndSignUp(rep *pb.OtpSignUpReq) (string, int, error)
-	SendOtp(phone string) (string, int, error)
+	SendOtp(phone string) error
+	VerifyOtpAndAuth(req *pb.VerifyOtpReq) (string, bool, int, error)
+	SaveUserDetails(req *pb.UserDetailsReq) error
 }

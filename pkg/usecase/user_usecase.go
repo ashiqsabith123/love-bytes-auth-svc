@@ -1,15 +1,12 @@
 package usecase
 
 import (
-	"errors"
-
 	"github.com/ashiqsabith123/auth-svc/pkg/domain"
 	repo "github.com/ashiqsabith123/auth-svc/pkg/repository/interface"
 	usecase "github.com/ashiqsabith123/auth-svc/pkg/usecase/interfaces"
 	"github.com/ashiqsabith123/auth-svc/pkg/utils"
 	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
 	"github.com/jinzhu/copier"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type UserUsecase struct {
@@ -20,55 +17,63 @@ func NewUserUsecase(repo repo.UserRepo) usecase.UserUsecase {
 	return &UserUsecase{UserRepo: repo}
 }
 
-func (U *UserUsecase) VerifyOtpAndSignUp(req *pb.OtpSignUpReq) (string, int, error) {
+func (U *UserUsecase) SendOtp(phone string) error {
 
-	var user domain.User
+	err := utils.SendOtp(phone)
 
-	copier.Copy(&user, &req)
-
-	err := utils.Validator(user)
 	if err != nil {
-		return "validation error", 6, err
+		return err
 	}
 
-	status, err := utils.VerifyOtp(req.Phone, req.Otp)
-	if err != nil {
-		return "Otp verification failed", status, err
-	}
+	return nil
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
-	if err != nil {
-		return "Bycrpt erro", 5, err
-	}
-
-	user.Password = string(hash)
-
-	err = U.UserRepo.CreateUser(user)
-	if err != nil {
-		return "Error in db", status, err
-	}
-
-	return "Otp verification sucess", status, nil
 }
 
-func (U *UserUsecase) SendOtp(phone string) (string, int, error) {
+func (U *UserUsecase) VerifyOtpAndAuth(req *pb.VerifyOtpReq) (string, bool, int, error) {
 
-	ok, err := U.UserRepo.FindUser(phone)
+	var userID uint
+	var newUser domain.User
+	userFound := true
+
+	resp, err := utils.VerifyOtp(req.Phone, req.Otp)
+	if err != nil {
+		return "", false, resp, err
+	}
+
+	userID, err = U.UserRepo.FindUser(req.Phone)
+	if err != nil {
+		return "", false, 500, err
+	}
+
+	if userID == 0 {
+		userFound = false
+		newUser.Phone = req.Phone
+		userID, err = U.UserRepo.CreateUser(newUser)
+		if err != nil {
+			return "", false, 500, err
+		}
+	}
+
+	token, err := utils.CreateJWTToken(userID)
+	if err != nil {
+		return "", false, 500, err
+	}
+
+	return token, userFound, 200, nil
+
+}
+
+func (U *UserUsecase) SaveUserDetails(req *pb.UserDetailsReq) error {
+	var userDetails domain.UserDetails
+
+	copier.Copy(&userDetails, req)
+	userDetails.UserID = 1
+
+	err := U.UserRepo.SaveUserDetails(userDetails)
 
 	if err != nil {
-		return "query error", 1, err
+		return err
 	}
 
-	if ok {
-		return "phone number found", 2, errors.New("user already exist with this phone number")
-	}
-
-	resp, err := utils.SendOtp(phone)
-
-	if err != nil {
-		return "Failed to send otp", 3, err
-	}
-
-	return resp, 4, nil
-
+	return nil
 }

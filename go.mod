@@ -3,6 +3,7 @@ module github.com/ashiqsabith123/auth-svc
 go 1.21.3
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.2.0
 	github.com/spf13/viper v1.17.0
 	github.com/twilio/twilio-go v1.15.2
 )
@@ -25,7 +26,7 @@ require (
 )
 
 require (
-	github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231127043225-8d5e2999447f
+	github.com/ashiqsabith123/love-bytes-proto v0.0.0-20231213101401-bdcf149611ab
 	github.com/fatih/color v1.16.0
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-playground/validator/v10 v10.16.0
@@ -51,7 +52,7 @@ require (
 	golang.org/x/sys v0.14.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/grpc v1.59.0
-	google.golang.org/protobuf v1.31.0 // indirect
+	google.golang.org/protobuf v1.31.0
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/driver/postgres v1.5.4

@@ -20,7 +20,7 @@ func InitTwilio(config config.Config) {
 	SERVICE_ID = config.Twilio.SerSid
 }
 
-func SendOtp(phone string) (string, error) {
+func SendOtp(phone string) error {
 	params := &openapi.CreateVerificationParams{}
 	params.SetTo("+91" + phone)
 	params.SetChannel("sms")
@@ -28,10 +28,10 @@ func SendOtp(phone string) (string, error) {
 	_, err := client.VerifyV2.CreateVerification(SERVICE_ID, params)
 
 	if err != nil {
-		return "Otp not send", err
+		return err
 	}
 
-	return "Otp send succesfully", err
+	return err
 
 }
 
@@ -43,14 +43,12 @@ func VerifyOtp(phone string, code string) (int, error) {
 	resp, err := client.VerifyV2.CreateVerificationCheck(SERVICE_ID, params)
 
 	if err != nil {
-		return 0, err
-	} else if *resp.Status == "approved" {
-		return 1, nil
+		return 403, err
 	} else if *resp.Status == "pending" {
-		return 2, errors.New("incorrect otp")
+		return 401, errors.New("incorrect otp")
 	} else if *resp.Status == "canceled" {
-		return 3, errors.New("otp expired")
+		return 403, errors.New("otp expired")
 	}
 
-	return 4, nil
+	return 200, nil
 }

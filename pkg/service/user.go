@@ -6,6 +6,8 @@ import (
 
 	usecase "github.com/ashiqsabith123/auth-svc/pkg/usecase/interfaces"
 	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 type UserService struct {
@@ -17,69 +19,76 @@ func NewUserService(usecase usecase.UserUsecase) UserService {
 	return UserService{UserUsecase: usecase}
 }
 
-func (U *UserService) VerifyOtpAndSignup(ctx context.Context, req *pb.OtpSignUpReq) (*pb.Responce, error) {
+func (U *UserService) SendOtp(ctx context.Context, req *pb.OtpReq) (*pb.Response, error) {
 
-	resp, status, err := U.UserUsecase.VerifyOtpAndSignUp(req)
-
-	var code int32
-
-	switch status {
-	case 0:
-		code = 404
-	case 1:
-		code = 200
-	case 2:
-		code = 401
-	case 3:
-		code = 403
-	case 5:
-		code = 500
-	case 6:
-		code = 400
-
-	}
+	err := U.UserUsecase.SendOtp(req.Phone)
 
 	if err != nil {
-		return &pb.Responce{
-			Message: resp,
-			Code:    code,
-			Error:   err.Error(),
+		return &pb.Response{
+			Code:    403,
+			Message: "Api error",
+			Error: &anypb.Any{
+				Value: []byte(err.Error()),
+			},
 		}, nil
 	}
-
-	return &pb.Responce{
-		Message: "Signup succesfull",
+	return &pb.Response{
 		Code:    200,
+		Message: "Otp send succesfully",
 	}, nil
 }
 
-func (U *UserService) SendOtp(ctx context.Context, req *pb.OtpReq) (*pb.Responce, error) {
+func (U *UserService) VerifyOtpAndAuth(ctx context.Context, req *pb.VerifyOtpReq) (*pb.Response, error) {
 
-	resp, status, err := U.UserUsecase.SendOtp(req.Phone)
-
-	var code int32
-
-	switch status {
-	case 1:
-		code = 500
-	case 3:
-		code = 500
-	case 2:
-		code = 400
-
-	}
-
-	fmt.Println(resp, err)
+	token, userFound, status, err := U.UserUsecase.VerifyOtpAndAuth(req)
 
 	if err != nil {
-		return &pb.Responce{
-			Code:    code,
-			Message: resp,
-			Error:   err.Error(),
+		return &pb.Response{
+			Code:    int32(status),
+			Message: "Authentication failed",
+			Error: &anypb.Any{
+				Value: []byte(err.Error()),
+			},
 		}, nil
 	}
-	return &pb.Responce{
-		Code:    200,
-		Message: resp,
+
+	data := &pb.TokenResp{
+		Userfound: userFound,
+		Token:     token,
+	}
+
+	dataInBytes, err := proto.Marshal(data)
+	if err != nil {
+		fmt.Println("Error:", err)
+
+	}
+
+	return &pb.Response{
+		Code:    int32(status),
+		Message: "Auth succesfull",
+		Data: &anypb.Any{
+			Value: dataInBytes,
+		},
+	}, nil
+
+}
+
+func (U *UserService) SaveUserDetais(ctx context.Context, req *pb.UserDetailsReq) (*pb.Response, error) {
+
+	err := U.UserUsecase.SaveUserDetails(req)
+
+	if err != nil {
+		return &pb.Response{
+			Code:    500,
+			Message: "Failed to add details",
+			Error: &anypb.Any{
+				Value: []byte(err.Error()),
+			},
+		}, nil
+	}
+
+	return &pb.Response{
+		Code:    201,
+		Message: "Details added succesfully",
 	}, nil
 }

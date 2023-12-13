@@ -22,6 +22,7 @@ func ConnectToDatabase(config config.Config) *gorm.DB {
 
 	db.AutoMigrate(
 		domain.User{},
+		domain.UserDetails{},
 	)
 
 	fmt.Println(helper.Green("Database connected succesfully...."))

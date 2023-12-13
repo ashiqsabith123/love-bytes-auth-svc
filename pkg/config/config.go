@@ -16,6 +16,10 @@ type TwilioConfig struct {
 	Auth   string `mapstructure:"auth"`
 }
 
+type JWTConfig struct {
+	SecretKey string `mapstructure:"secret-key"`
+}
+
 type Port struct {
 	SvcPort string `mapstructure:"port"`
 }
@@ -24,6 +28,7 @@ type Config struct {
 	Postgres DBConfig     `mapstructure:"db"`
 	Port     Port         `mapstructure:"svc-port"`
 	Twilio   TwilioConfig `mapstructure:"twilio"`
+	JWT      JWTConfig    `mapstructure:"jwt"`
 }
 
 var config Config
@@ -43,4 +48,8 @@ func LoadConfig() (Config, error) {
 	}
 
 	return config, nil
+}
+
+func GetSecretKey() string {
+	return config.JWT.SecretKey
 }

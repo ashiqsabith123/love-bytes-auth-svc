@@ -4,9 +4,17 @@ import "gorm.io/gorm"
 
 type User struct {
 	gorm.Model
-	UserID   int    `gorm:"primaryKey;autoIncrement" `
-	Fullname string `gorm:"not null" json:"fullname,omitempty" validate:"required,min=3,max=50"`
-	Phone    string `gorm:"unique" json:"phone,omitempty" validate:"required"`
-	Username string `gorm:"unique; not null" json:"username,omitempty" validate:"required,min=3,max=50"`
-	Password string `gorm:"not null" json:"password,omitempty" validate:"required,min=6,max=50"`
+	ID    uint   `gorm:"primaryKey;autoIncrement;not null" json:"id,omitempty" validate:"-"`
+	Phone string `gorm:"unique;not null" json:"phone,omitempty"`
+}
+
+type UserDetails struct {
+	gorm.Model
+	UserID      uint   `gorm:"unique;not null" validate:"-"`
+	User        User   `gorm:"foreignKey:UserID"`
+	Fullname    string `gorm:"not null" json:"fullname,omitempty" validate:"required,max=50"`
+	Email       string `gorm:"not null" validate:"required"`
+	Location    string `gorm:"not null" validate:"required"`
+	DateOfBirth string `gorm:"not null" validate:"required"`
+	Gender      string `gorm:"not null" validate:"required"`
 }
