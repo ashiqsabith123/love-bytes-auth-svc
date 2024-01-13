@@ -1,0 +1,36 @@
+General Logger:	2024/01/13 10:31:11 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/13 10:31:11 main.go:39: Auth Svc on :50051
+General Logger:	2024/01/13 10:35:37 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/13 10:35:37 database.go:27: Database connected succesfully....
+General Logger:	2024/01/13 10:35:37 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/13 10:49:54 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/13 10:49:54 database.go:27: Database connected succesfully....
+General Logger:	2024/01/13 10:49:54 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/13 10:51:00 logger.go:29: 
+
+
+Application restarted ---------
+Error Logger:	2024/01/13 10:51:00 database.go:28: ERROR: column "latitude" of relation "user_details" contains null values (SQLSTATE 23502)
+General Logger:	2024/01/13 10:51:00 database.go:31: Database connected succesfully....
+General Logger:	2024/01/13 10:51:00 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/13 12:19:38 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/13 12:19:38 database.go:31: Database connected succesfully....
+General Logger:	2024/01/13 12:19:38 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/13 12:24:32 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/13 12:24:32 database.go:31: Database connected succesfully....
+General Logger:	2024/01/13 12:24:32 main.go:39: Auth Svc connected on :50051

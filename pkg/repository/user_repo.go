@@ -45,3 +45,25 @@ func (U *UserRepo) SaveUserDetails(userDetails domain.UserDetails) error {
 
 	return nil
 }
+
+func (U *UserRepo) GetUserByID(id uint) (userDetails domain.UserDetails, err error) {
+
+	query := "SELECT * FROM user_details WHERE user_id=$1"
+
+	if err := U.Postgres.Raw(query, id).Scan(&userDetails).Error; err != nil {
+		return domain.UserDetails{}, errors.New("error while fetching user data:" + err.Error())
+	}
+
+	return userDetails, nil
+}
+
+func (U *UserRepo) GetUsersByGender(gender string) (userDetails []domain.UserDetails, err error) {
+
+	query := "SELECT * FROM user_details WHERE gender=$1"
+
+	if err := U.Postgres.Raw(query, gender).Scan(&userDetails).Error; err != nil {
+		return []domain.UserDetails{}, errors.New("error while fetching user data by gender: " + err.Error())
+	}
+
+	return userDetails, nil
+}

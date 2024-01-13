@@ -2,11 +2,10 @@ package db
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/ashiqsabith123/auth-svc/pkg/config"
 	"github.com/ashiqsabith123/auth-svc/pkg/domain"
-	"github.com/ashiqsabith123/auth-svc/pkg/helper"
+	logs "github.com/ashiqsabith123/love-bytes-proto/log"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -16,16 +15,20 @@ func ConnectToDatabase(config config.Config) *gorm.DB {
 	db, err := gorm.Open(postgres.Open(connstr), &gorm.Config{})
 
 	if err != nil {
-		log.Fatal(helper.Red("Failed to connect database - ", err))
+		logs.ErrLog.Fatal("Failed to connect database - ", err)
 		return nil
 	}
 
-	db.AutoMigrate(
+	err = db.AutoMigrate(
 		domain.User{},
 		domain.UserDetails{},
 	)
 
-	fmt.Println(helper.Green("Database connected succesfully...."))
+	if err != nil {
+		logs.ErrLog.Println(err)
+	}
+
+	logs.GenLog.Println("Database connected succesfully....")
 
 	return db
 }

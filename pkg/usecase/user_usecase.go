@@ -67,7 +67,6 @@ func (U *UserUsecase) SaveUserDetails(req *pb.UserDetailsReq) error {
 	var userDetails domain.UserDetails
 
 	copier.Copy(&userDetails, req)
-	userDetails.UserID = 1
 
 	err := U.UserRepo.SaveUserDetails(userDetails)
 
@@ -76,4 +75,27 @@ func (U *UserUsecase) SaveUserDetails(req *pb.UserDetailsReq) error {
 	}
 
 	return nil
+}
+
+func (U *UserUsecase) GetUserByID(req *pb.UserIDRequest) (domain.UserDetails, error) {
+	userDetails, err := U.UserRepo.GetUserByID(uint(req.UserID))
+
+	if err != nil {
+		return userDetails, err
+	}
+
+	return userDetails, nil
+
+}
+
+
+func (U *UserUsecase) GetUsersByGender(req *pb.UserGenderRequest) ([]domain.UserDetails, error) {
+	userDetails, err := U.UserRepo.GetUsersByGender(req.Gender)
+
+	if err != nil {
+		return userDetails, err
+	}
+
+	return userDetails, nil
+
 }
