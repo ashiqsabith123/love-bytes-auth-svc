@@ -7,6 +7,7 @@ import (
 
 	usecase "github.com/ashiqsabith123/auth-svc/pkg/usecase/interfaces"
 	"github.com/ashiqsabith123/love-bytes-proto/auth/pb"
+	logs "github.com/ashiqsabith123/love-bytes-proto/log"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )
@@ -44,6 +45,7 @@ func (U *UserService) VerifyOtpAndAuth(ctx context.Context, req *pb.VerifyOtpReq
 	token, userFound, status, err := U.UserUsecase.VerifyOtpAndAuth(req)
 
 	if err != nil {
+		logs.ErrLog.Println(err)
 		return &pb.Response{
 			Code:    int32(status),
 			Message: "Authentication failed",
@@ -167,6 +169,7 @@ func (U *UserService) GetUsersByGender(ctx context.Context, req *pb.UserGenderRe
 			Location: v.Location,
 			Lat:      v.Latitude,
 			Log:      v.Longitude,
+			Dob:      v.DateOfBirth,
 		}
 
 		data[i] = userData
@@ -195,3 +198,4 @@ func (U *UserService) GetUsersByGender(ctx context.Context, req *pb.UserGenderRe
 		},
 	}, nil
 }
+
