@@ -84,6 +84,8 @@ func (U *UserUsecase) GetUserByID(req *pb.UserIDRequest) (domain.UserDetails, er
 		return userDetails, err
 	}
 
+	
+
 	return userDetails, nil
 
 }

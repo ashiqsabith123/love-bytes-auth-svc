@@ -43,11 +43,11 @@ func VerifyOtp(phone string, code string) (int, error) {
 	resp, err := client.VerifyV2.CreateVerificationCheck(SERVICE_ID, params)
 
 	if err != nil {
-		return 403, err
+		return 403, errors.New("Something went wrong")
 	} else if *resp.Status == "pending" {
-		return 401, errors.New("incorrect otp")
+		return 401, errors.New("Incorrect OTP")
 	} else if *resp.Status == "canceled" {
-		return 403, errors.New("otp expired")
+		return 403, errors.New("OTP expired")
 	}
 
 	return 200, nil

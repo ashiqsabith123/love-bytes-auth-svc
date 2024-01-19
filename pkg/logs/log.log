@@ -84,3 +84,61 @@ General Logger:	2024/01/18 09:36:45 logger.go:29:
 Application restarted ---------
 General Logger:	2024/01/18 09:36:45 database.go:31: Database connected succesfully....
 General Logger:	2024/01/18 09:36:45 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/18 11:59:23 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/18 11:59:23 database.go:31: Database connected succesfully....
+General Logger:	2024/01/18 11:59:23 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/19 10:09:20 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/19 10:09:20 database.go:31: Database connected succesfully....
+General Logger:	2024/01/19 10:09:20 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/19 10:16:01 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/19 10:16:01 database.go:31: Database connected succesfully....
+General Logger:	2024/01/19 10:16:01 main.go:39: Auth Svc connected on :50051
+Error Logger:	2024/01/19 10:16:09 user.go:29: Status: 401 - ApiError 20003: Authenticate (null) More info: https://www.twilio.com/docs/errors/20003
+General Logger:	2024/01/19 10:25:57 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/19 10:25:57 database.go:31: Database connected succesfully....
+General Logger:	2024/01/19 10:25:57 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/19 10:36:34 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/19 10:36:34 database.go:31: Database connected succesfully....
+General Logger:	2024/01/19 10:36:34 main.go:39: Auth Svc connected on :50051
+Error Logger:	2024/01/19 17:34:58 user.go:29: Status: 403 - ApiError 21608: The phone number is unverified. Trial accounts cannot send messages to unverified numbers; verify it at twilio.com/user/account/phone-numbers/verified (null) More info: https://www.twilio.com/docs/errors/21608
+Error Logger:	2024/01/19 18:41:46 user.go:49: incorrect otp
+Error Logger:	2024/01/19 18:42:23 user.go:49: incorrect otp
+Error Logger:	2024/01/19 18:42:57 user.go:49: incorrect otp
+General Logger:	2024/01/19 18:43:54 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/19 18:43:54 database.go:31: Database connected succesfully....
+General Logger:	2024/01/19 18:43:54 main.go:39: Auth Svc connected on :50051
+Error Logger:	2024/01/19 18:44:02 user.go:49: Incorrect OTP
+Error Logger:	2024/01/19 18:44:32 user.go:49: Incorrect OTP
+Error Logger:	2024/01/19 18:44:42 user.go:49: Status: 429 - ApiError 60202: Max check attempts reached (null) More info: https://www.twilio.com/docs/errors/60202
+Error Logger:	2024/01/19 18:46:30 user.go:49: Status: 429 - ApiError 60202: Max check attempts reached (null) More info: https://www.twilio.com/docs/errors/60202
+General Logger:	2024/01/19 18:48:37 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/19 18:48:37 database.go:31: Database connected succesfully....
+General Logger:	2024/01/19 18:48:37 main.go:39: Auth Svc connected on :50051
+Error Logger:	2024/01/19 18:48:48 user.go:49: Something went wrong
+Error Logger:	2024/01/19 18:49:25 user.go:49: Something went wrong
+Error Logger:	2024/01/19 18:49:43 user.go:29: Status: 403 - ApiError 21608: The phone number is unverified. Trial accounts cannot send messages to unverified numbers; verify it at twilio.com/user/account/phone-numbers/verified (null) More info: https://www.twilio.com/docs/errors/21608
+Error Logger:	2024/01/19 18:49:49 user.go:29: Status: 403 - ApiError 21608: The phone number is unverified. Trial accounts cannot send messages to unverified numbers; verify it at twilio.com/user/account/phone-numbers/verified (null) More info: https://www.twilio.com/docs/errors/21608
+Error Logger:	2024/01/19 18:50:32 user.go:29: Status: 429 - ApiError 60203: Max send attempts reached (null) More info: https://www.twilio.com/docs/errors/60203
+Error Logger:	2024/01/19 18:50:39 user.go:29: Status: 429 - ApiError 60203: Max send attempts reached (null) More info: https://www.twilio.com/docs/errors/60203
+Error Logger:	2024/01/19 18:51:18 user.go:29: Status: 403 - ApiError 21608: The phone number is unverified. Trial accounts cannot send messages to unverified numbers; verify it at twilio.com/user/account/phone-numbers/verified (null) More info: https://www.twilio.com/docs/errors/21608

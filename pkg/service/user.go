@@ -26,6 +26,7 @@ func (U *UserService) SendOtp(ctx context.Context, req *pb.OtpReq) (*pb.Response
 	err := U.UserUsecase.SendOtp(req.Phone)
 
 	if err != nil {
+		logs.ErrLog.Println(err)
 		return &pb.Response{
 			Code:    http.StatusForbidden,
 			Message: "Api error",
@@ -198,4 +199,3 @@ func (U *UserService) GetUsersByGender(ctx context.Context, req *pb.UserGenderRe
 		},
 	}, nil
 }
-
