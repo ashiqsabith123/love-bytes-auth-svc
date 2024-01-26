@@ -128,6 +128,8 @@ func (U *UserService) GetUserByID(ctx context.Context, req *pb.UserIDRequest) (*
 		Gender:   userDetails.Gender,
 	}
 
+	fmt.Println(data)
+
 	dataInBytes, err := proto.Marshal(data)
 	if err != nil {
 		return &pb.Response{
@@ -138,6 +140,8 @@ func (U *UserService) GetUserByID(ctx context.Context, req *pb.UserIDRequest) (*
 			},
 		}, nil
 	}
+
+	
 
 	return &pb.Response{
 		Code:    http.StatusOK,
