@@ -4,3 +4,45 @@ General Logger:	2024/01/26 16:14:18 logger.go:29:
 Application restarted ---------
 General Logger:	2024/01/26 16:14:18 database.go:31: Database connected succesfully....
 General Logger:	2024/01/26 16:14:18 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/27 09:14:02 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/27 09:14:02 database.go:31: Database connected succesfully....
+General Logger:	2024/01/27 09:14:02 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/29 13:27:38 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/29 13:27:38 database.go:31: Database connected succesfully....
+General Logger:	2024/01/29 13:27:38 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/29 13:32:30 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/29 13:32:30 database.go:31: Database connected succesfully....
+General Logger:	2024/01/29 13:32:30 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/29 15:01:46 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/29 15:01:46 database.go:31: Database connected succesfully....
+General Logger:	2024/01/29 15:01:46 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/29 15:30:15 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/29 15:30:15 database.go:31: Database connected succesfully....
+General Logger:	2024/01/29 15:30:15 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/29 15:36:21 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/29 15:36:21 database.go:31: Database connected succesfully....
+General Logger:	2024/01/29 15:36:21 main.go:39: Auth Svc connected on :50051
+General Logger:	2024/01/30 10:21:02 logger.go:29: 
+
+
+Application restarted ---------
+General Logger:	2024/01/30 10:21:02 database.go:31: Database connected succesfully....
+General Logger:	2024/01/30 10:21:02 main.go:39: Auth Svc connected on :50051
